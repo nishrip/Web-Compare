@@ -160,3 +160,36 @@ container.addEventListener('wheel', e => {
 
 // Initial Position setzen
 updateBackgroundPosition();
+
+let pinchStartDistance = null;
+let pinchStartScale = scale;
+
+function getDistance(touch1, touch2) {
+  const dx = touch2.clientX - touch1.clientX;
+  const dy = touch2.clientY - touch1.clientY;
+  return Math.sqrt(dx * dx + dy * dy);
+}
+
+container.addEventListener('touchstart', e => {
+  if (e.touches.length === 2) {
+    pinchStartDistance = getDistance(e.touches[0], e.touches[1]);
+    pinchStartScale = scale;
+  }
+}, { passive: false });
+
+container.addEventListener('touchmove', e => {
+  if (e.touches.length === 2 && pinchStartDistance !== null) {
+    const currentDistance = getDistance(e.touches[0], e.touches[1]);
+    const zoomFactor = currentDistance / pinchStartDistance;
+    scale = clamp(pinchStartScale * zoomFactor, 1, 5);
+    updateBackgroundPosition();
+    e.preventDefault();
+  }
+}, { passive: false });
+
+container.addEventListener('touchend', e => {
+  if (e.touches.length < 2) {
+    pinchStartDistance = null;
+  }
+});
+
