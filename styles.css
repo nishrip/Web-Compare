@@ -1,0 +1,55 @@
+html, body {
+  margin: 0; padding: 0; height: 100%; overflow: hidden;
+}
+
+.container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: #000;
+  overflow: hidden;
+  touch-action: none;
+}
+
+.pane {
+  position: absolute;
+  top: 0; bottom: 0; width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  cursor: grab;
+  user-select: none;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-position 0.1s;
+}
+
+#left {
+  z-index: 1;
+  background-image: url('Depth%20of%20Field.png');
+}
+
+#right {
+  z-index: 2;
+  background-image: url('no%20Depth%20of%20Field.png');
+  clip-path: inset(0 0 0 50%);
+}
+
+#slider {
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 50%;
+  width: 10px;
+  margin-left: -5px;
+  background: rgba(99, 168, 219, 0.53);
+  border-left: 2px solid rgba(255, 255, 255, 0.2);
+  border-right: 2px solid rgba(255, 255, 255, 0.2);
+  cursor: ew-resize;
+  z-index: 3;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#slider:hover {
+  background: rgba(255, 177, 0, 0.8);
+}
