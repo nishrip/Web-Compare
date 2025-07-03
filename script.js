@@ -34,14 +34,14 @@ function updateBackgroundPosition() {
   const bgWidth = containerRect.width * scale;
   const bgHeight = containerRect.height * scale;
 
-  const maxShiftX = Math.max(0, (bgWidth - containerRect.width) / 2);
-  const maxShiftY = Math.max(0, (bgHeight - containerRect.height) / 2);
+  const maxShiftX = Math.max(0, (bgWidth - containerRect.width));
+  const maxShiftY = Math.max(0, (bgHeight - containerRect.height));
 
-  posX = clamp(posX, -maxShiftX, maxShiftX);
-  posY = clamp(posY, -maxShiftY, maxShiftY);
+  posX = clamp(posX, -maxShiftX, 0);
+  posY = clamp(posY, -maxShiftY, 0);
 
-  const posXPercent = maxShiftX === 0 ? 50 : 50 - (posX / maxShiftX) * 50;
-  const posYPercent = maxShiftY === 0 ? 50 : 50 - (posY / maxShiftY) * 50;
+  const posXPercent = (posX / maxShiftX) * 50 + 50;
+  const posYPercent = (posY / maxShiftY) * 50 + 50;
 
   left.style.backgroundSize = `${scale * 100}% auto`;
   right.style.backgroundSize = `${scale * 100}% auto`;
