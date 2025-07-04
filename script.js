@@ -28,20 +28,24 @@ function updateSlider(x) {
   right.style.clipPath = `inset(0 0 0 ${percent}%)`;
 }
 
-function updateBackgroundPosition() {
+function updateBackgroundPosition(imageAspectRatio = 2) {
   const containerRect = container.getBoundingClientRect();
 
-  const bgWidth = containerRect.width * scale;
-  const bgHeight = containerRect.height * scale;
+  const containerWidth = containerRect.width;
+  const containerHeight = containerRect.height;
 
-  const maxShiftX = Math.max(0, (bgWidth - containerRect.width));
-  const maxShiftY = Math.max(0, (bgHeight - containerRect.height));
+  const bgWidth = containerWidth * scale;
+  const bgHeight = bgWidth / imageAspectRatio;
 
-  posX = clamp(posX, -maxShiftX, 0);
-  posY = clamp(posY, -maxShiftY, 0);
+  const maxShiftX = Math.max(0, bgWidth - containerWidth);
+  const maxShiftY = Math.max(0, bgHeight - containerHeight);
 
-  const posXPercent = (posX / maxShiftX) * 50 + 50;
-  const posYPercent = (posY / maxShiftY) * 50 + 50;
+  // ✅ Correct clamping range for panning
+  posX = clamp(posX, 0, maxShiftX);
+  posY = clamp(posY, 0, maxShiftY);
+
+  const posXPercent = maxShiftX === 0 ? 50 : 50 - (posX / maxShiftX) * 50;
+  const posYPercent = maxShiftY === 0 ? 50 : 50 - (posY / maxShiftY) * 50;
 
   left.style.backgroundSize = `${scale * 100}% auto`;
   right.style.backgroundSize = `${scale * 100}% auto`;
