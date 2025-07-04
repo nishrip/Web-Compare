@@ -26,12 +26,12 @@ html, body {
 
 #left {
   z-index: 1;
-  background-image: url('Depth%20of%20Field.png');
+  background-image: url('2745hell.png');
 }
 
 #right {
   z-index: 2;
-  background-image: url('no%20Depth%20of%20Field.png');
+  background-image: url('2745dunkel.png');
   clip-path: inset(0 0 0 50%);
 }
 
