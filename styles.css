@@ -26,12 +26,12 @@ html, body {
 
 #left {
   z-index: 1;
-  background-image: url('2745hell.png');
+  background-image: url('2745%20helle%20Fenster.png');
 }
 
 #right {
   z-index: 2;
-  background-image: url('2745dunkel.png');
+  background-image: url('2745%20dunkle%20Fenster.png');
   clip-path: inset(0 0 0 50%);
 }
 
